@@ -1,0 +1,85 @@
+@layer reset, base;
+
+@layer reset {
+  * {
+    margin: 0;
+    padding: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 0;
+
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+  }
+
+  hr {
+    height: 0;
+  }
+
+  ul, ol {
+    list-style: none;
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: "EB Garamond Variable";
+    font-weight: 400 800;
+    font-style: normal;
+
+    src: url("./EBGaramond-VariableFont_wght.subset.woff2")
+      format("woff2-variations");
+  }
+
+  @font-face {
+    font-family: "EB Garamond Variable";
+    font-weight: 400 800;
+    font-style: italic;
+
+    src: url("./EBGaramond-Italic-VariableFont_wght.subset.woff2")
+      format("woff2-variations");
+  }
+
+  :root {
+    --color-background: #f4f4f8;
+    --color-foreground: #0b1820;
+    --color-accent: #4f00ff;
+
+    --font-family-sans: Arial, Helvetica, sans-serif;
+    --font-family-serif: "EB Garamond Variable", serif;
+  }
+
+  *:focus-visible {
+    outline: none;
+  }
+
+  *::selection {
+    color: var(--color-background);
+    background-color: var(--color-accent);
+  }
+
+  body {
+    font-family: var(--font-family-sans);
+    line-height: 1.4;
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+  }
+
+  a:any-link {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.125em;
+
+    &:focus-visible,
+    &:hover {
+      color: var(--color-background);
+      background-color: var(--color-accent);
+    }
+  }
+}

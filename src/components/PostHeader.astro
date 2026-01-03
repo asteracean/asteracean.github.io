@@ -1,0 +1,41 @@
+---
+import CategoryList from 'src/components/CategoryList.astro';
+import Date from 'src/components/Date.astro';
+import styles from 'src/components/PostHeader.module.css';
+
+interface Props {
+  published: Date;
+  updated?: Date;
+  categories?: { name: string; slug: string; }[];
+}
+
+const {
+  published,
+  updated,
+  categories,
+} = Astro.props;
+---
+
+<header class={styles.container}>
+  {
+    Astro.slots.has('cover') && (
+      <div class={styles.cover}>
+        <slot name="cover" />
+      </div>
+    )
+  }
+
+  <div class={styles.meta}>
+    <div>
+      Published&nbsp;<Date date={published} />{categories && categories.length > 0 && <>&nbsp;in <CategoryList categories={categories} /></>}
+    </div>
+
+    {
+      updated && (
+        <div>
+          Last updated&nbsp;<Date date={updated} />
+        </div>
+      )
+    }
+  </div>
+</header>

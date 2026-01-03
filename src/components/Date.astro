@@ -1,0 +1,13 @@
+---
+import styles from 'src/components/Date.module.css';
+
+interface Props {
+  date: Date;
+}
+
+const { date } = Astro.props;
+
+const title = date.toLocaleDateString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric' });
+---
+
+<time class={styles.date} datetime={date.toISOString()}>{title}</time>

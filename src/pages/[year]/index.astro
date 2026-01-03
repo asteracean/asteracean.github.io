@@ -1,0 +1,33 @@
+---
+import Page from 'src/components/Page.astro';
+import PageHeader from 'src/components/PageHeader.astro';
+import PageLayout from 'src/components/PageLayout.astro';
+import PostList from 'src/components/PostList.astro';
+import PostListItem from 'src/components/PostListItem.astro';
+import { getPostsCollection } from 'src/content';
+
+export const getStaticPaths = async () => {
+  const posts = await getPostsCollection();
+  return posts.map((post) => ({
+    params: {
+      year: post.data.published.getFullYear().toString(),
+    },
+  }));
+};
+
+const { year } = Astro.params;
+
+const allPosts = await getPostsCollection();
+const posts = allPosts.filter((post) => post.data.published.getFullYear().toString() === year);
+---
+
+<Page title={year} description={`Posts published in ${year}`}>
+  <PageLayout>
+    <PageHeader title={year} slot="header" />
+    <main>
+      <PostList>
+        {posts.map((post) => <PostListItem {post} />)}
+      </PostList>
+    </main>
+  </PageLayout>
+</Page>

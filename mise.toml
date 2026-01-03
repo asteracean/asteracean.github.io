@@ -1,0 +1,8 @@
+min_version = "2025.10.4"
+
+[tools]
+"dprint" = "latest"
+"node" = "latest"
+
+[env]
+_.path = ['{{config_root}}/node_modules/.bin']

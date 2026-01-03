@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import CategoryList from 'src/components/CategoryList.astro';
+import Date from 'src/components/Date.astro';
+import styles from 'src/components/PostListItem.module.css';
+import { getPostUrl, type PublishedPost } from 'src/content';
+
+interface Props {
+  post: PublishedPost;
+}
+
+const {
+  post,
+} = Astro.props;
+---
+
+<li class={styles.container}>
+  {
+    post.data.cover && (
+      <div aria-hidden class={styles.cover}>
+        <Image src={post.data.cover.src} alt={post.data.cover.alt} />
+      </div>
+    )
+  }
+
+  <div class={styles['content-outer']}>
+    <div class={styles['content-inner']}>
+      <a href={getPostUrl(post)} class={styles['title-link']}>{post.data.title}</a>
+      / <Date date={post.data.published} />{post.data.categories && post.data.categories.length > 0 && <>&nbsp;in <CategoryList categories={post.data.categories} /></>}
+    </div>
+  </div>
+</li>

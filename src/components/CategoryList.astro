@@ -1,0 +1,14 @@
+---
+import styles from 'src/components/CategoryList.module.css';
+import { type Category, getCategoryUrl } from 'src/content';
+
+interface Props {
+  categories: Category[];
+}
+
+const {
+  categories,
+} = Astro.props;
+---
+
+<ul class={styles['list']}>{categories.map((category) => <li class={styles['list-item']}><a href={getCategoryUrl(category)}>{category.name}</a></li>)}</ul>

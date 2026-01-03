@@ -1,0 +1,22 @@
+---
+import Page from 'src/components/Page.astro';
+import PageHeader from 'src/components/PageHeader.astro';
+import PageLayout from 'src/components/PageLayout.astro';
+import PostList from 'src/components/PostList.astro';
+import PostListItem from 'src/components/PostListItem.astro';
+import { siteDescription, siteTitle } from 'src/constants.ts';
+import { getPostsCollection } from 'src/content';
+
+const posts = await getPostsCollection();
+---
+
+<Page title={siteTitle} description={siteDescription}>
+  <PageLayout>
+    <PageHeader title={siteTitle} slot="header" />
+    <main>
+      <PostList>
+        {posts.map((post) => <PostListItem {post} />)}
+      </PostList>
+    </main>
+  </PageLayout>
+</Page>

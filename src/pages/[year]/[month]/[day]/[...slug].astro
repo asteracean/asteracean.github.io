@@ -1,0 +1,47 @@
+---
+import { getImage } from 'astro:assets';
+import Page from 'src/components/Page.astro';
+import PageHeader from 'src/components/PageHeader.astro';
+import PageLayout from 'src/components/PageLayout.astro';
+import PostContent from 'src/components/PostContent.astro';
+import PostHeader from 'src/components/PostHeader.astro';
+import { getPostsCollection, type PublishedPost } from 'src/content';
+
+export const getStaticPaths = async () => {
+  const posts = await getPostsCollection();
+  return posts.map((post) => ({
+    params: {
+      year: post.data.published.toLocaleString('en-CA', { year: 'numeric' }),
+      month: post.data.published.toLocaleString('en-CA', { month: '2-digit' }),
+      day: post.data.published.toLocaleString('en-CA', { day: '2-digit' }),
+      slug: post.slug,
+    },
+    props: post,
+  }));
+};
+
+type Props = PublishedPost;
+
+const post = Astro.props;
+const { Content } = await post.render();
+
+const cover = post.data.cover && await getImage(post.data.cover);
+---
+
+<Page title={post.data.title} description={post.data.description} image={cover?.src}>
+  <PageLayout>
+    <PageHeader slot="header" title={post.data.title} />
+
+    <main>
+      <article>
+        <PostHeader published={post.data.published} updated={post.data.updated} categories={post.data.categories}>
+          {cover && <img slot="cover" src={cover.src} {...cover.attributes} />}
+        </PostHeader>
+
+        <PostContent>
+          <Content />
+        </PostContent>
+      </article>
+    </main>
+  </PageLayout>
+</Page>

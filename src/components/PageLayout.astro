@@ -1,0 +1,17 @@
+---
+import styles from 'src/components/PageLayout.module.css';
+---
+
+<div class={styles.container}>
+  {
+    Astro.slots.has('header') && (
+      <div class={styles.header}>
+        <slot name="header" />
+      </div>
+    )
+  }
+
+  <div class={styles.main}>
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,6 @@
+.date {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.1em;
+}

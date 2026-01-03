@@ -1,0 +1,38 @@
+.container-outer {
+  box-sizing: border-box;
+  inline-size: min(100vw, 200ch);
+  margin-inline: auto;
+}
+
+.container-inner {
+  display: flex;
+  gap: 0.25em;
+  align-items: start;
+
+  padding: 0.25em;
+
+  font-size: clamp(40px, 8vw, 128px);
+  font-weight: 700;
+  line-height: 1;
+  hyphens: auto;
+}
+
+.logo-link {
+  display: flex;
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+  inline-size: clamp(40px, 8vw, 128px);
+
+  fill: var(--color-accent);
+
+  &:focus-visible,
+  &:hover {
+    background-color: var(--color-accent);
+    fill: var(--color-background);
+  }
+}
+
+.title {
+  color: var(--color-accent);
+}

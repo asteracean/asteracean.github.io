@@ -1,0 +1,25 @@
+---
+import styles from 'src/components/PageHeader.module.css';
+
+interface Props {
+  readonly title: string;
+}
+
+const {
+  title,
+} = Astro.props;
+---
+
+<header class={styles['container-outer']}>
+  <header class={styles['container-inner']}>
+    <a class={styles['logo-link']} href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" aria-label="Home" viewBox="0 0 1000 1000">
+        <path d="M1000 200v300H500V0h300v200z M0 500h500v500H200V800H0z" />
+      </svg>
+    </a>
+
+    <h1 class={styles.title}>
+      {title}
+    </h1>
+  </header>
+</header>
